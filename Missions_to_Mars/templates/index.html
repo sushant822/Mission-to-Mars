@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Mission to Mars</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+  <style>
+    img {
+        vertical-align: middle;
+        height: 500px;
+        width: 500px;
+    }
+    .border {
+      border-right: 1px solid black;
+    }
+	  .hvr-shadow:hover, .hvr-shadow:focus, .hvr-shadow:active {
+  box-shadow: 0 10px 10px -10px rgba(0, 0, 0, 0.5);
+}
+  </style>
+
+</head>
+
+<body>
+  <div class="container">
+    <div class="jumbotron text-center">
+      <h1><b>Mission to Mars</b></h1>
+      <p><a class="btn btn-primary btn-lg" href="/scrape" role="button">Scrape Mars Data</a></p>
+    </div>
+    
+      
+        {% for mars_obj in mars %}
+        <hr>
+          <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h2 class="heading"><b>Latest Mars News</b></h2>
+        <h4><b>{{mars_obj.news_title}}</b></h4>
+        <h4>{{mars_obj.news_p}}</h4>
+          <hr>
+        <div class="container">
+          <div class="row">
+            <div class ="col-md-12">
+            </div>
+            <div class="col-md-5">
+              <h2 class="heading">Featured Mars Image</h2>
+              <img src="{{mars_obj.featured_image_url}}" width="150" class="img-responsive">
+            </div>
+            <div class="col-md-1">
+            </div>
+            <div class="col-md-5" style="padding-top: 20px;">
+                <span class="border">
+                <b><h3>Current Weather On Mars</h3></b>
+                  <p>{{mars_obj.mars_weather}}</p>
+                </span>
+                <div class="row" style="padding-left: 16px;">
+					
+                  <h3 class="header" > Mars Facts</h3>
+                    <table>
+                      {{mars_obj.facts_table|safe}}
+                    </table>
+					
+                </div>
+            </div>
+            </div>
+          </div> 
+        <br>
+		  <hr>
+		  <br>
+                 
+          {% for i in mars_obj.hemisphere_image_urls %}
+            <div class = "col-md-6">
+				<div class="hvr-shadow">
+              <div class=thumbnail>
+              <img src="{{ i['img_url'] }}" alt=......>
+                <div class = "caption">
+                  <h4 style="text-align:center"><b>{{ i['title'] }}</b></h4>
+                </div>
+              </div>
+					</div>
+            </div>
+          {% endfor %}  
+        {% endfor %}
+ 
+    </div>
+  </div>
+
+</body>
+
+</html>
